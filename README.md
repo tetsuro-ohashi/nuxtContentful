@@ -1,4 +1,4 @@
-# otherBlog
+# nuxtContentful
 
 ## Build Setup
 
