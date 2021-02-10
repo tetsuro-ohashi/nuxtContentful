@@ -1,0 +1,27 @@
+{
+  "name": "otherBlog",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@contentful/rich-text-html-renderer": "^14.1.2",
+    "@contentful/rich-text-react-renderer": "^14.1.2",
+    "@nuxtjs/markdownit": "^2.0.0",
+    "axios": "^0.21.1",
+    "contentful": "^8.1.7",
+    "contentful-rich-text-vue-renderer": "^2.0.0",
+    "core-js": "^3.8.3",
+    "css-loader": "^2.0.0",
+    "markdown-it": "^12.0.4",
+    "nuxt": "^2.14.12",
+    "vue-infinite-loading": "^2.4.5"
+  },
+  "devDependencies": {
+    "@nuxtjs/style-resources": "^1.0.0"
+  }
+}
