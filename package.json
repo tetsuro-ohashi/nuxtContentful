@@ -10,7 +10,7 @@
     "heroku-postbuild": "npm run build"
   },
   "engines": {
-    "node": "4.2.3"
+    "node": "11.10.1"
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^14.1.2",
