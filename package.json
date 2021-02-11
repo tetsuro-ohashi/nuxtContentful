@@ -9,7 +9,9 @@
     "generate": "nuxt generate",
     "heroku-postbuild": "npm run build"
   },
-
+  "engines": {
+    "node": "4.2.3"
+  },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^14.1.2",
     "@contentful/rich-text-react-renderer": "^14.1.2",
