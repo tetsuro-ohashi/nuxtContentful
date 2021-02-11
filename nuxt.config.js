@@ -41,7 +41,7 @@ export default {
   plugins: [
     {
       src: '~/plugins/infiniteloading',
-      // ssr: false
+      ssr: false
     },
     '~/plugins/markdownit', // 追加
   ],
