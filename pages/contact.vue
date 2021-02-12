@@ -1,4 +1,5 @@
 <template>
+  <h1>Contact</h1>
   <section>
     <form role="form" method="POST" @submit.prevent="sendEmail">
       <!--NAME -->

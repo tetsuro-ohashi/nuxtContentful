@@ -1,5 +1,5 @@
 <template>
-  <h1>Success</h1>
+  <h1>404</h1>
   <div>
     <nuxt-link to="/">TOP</nuxt-link>
   </div>
