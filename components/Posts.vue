@@ -10,13 +10,13 @@
 
 <script>
 import client from '~/plugins/contentful.js'
-var page = 1
+var page = 0
 var posts_per_page = 2
 export default {
   name: "Posts",
   data() {
     return {
-      page: 1,
+      // page: 1,
       posts: []
     };
   },
