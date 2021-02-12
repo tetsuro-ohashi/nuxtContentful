@@ -33,17 +33,13 @@ export default {
     ]
   },
 
-  router: {
-    // base: '/nuxtContentful/'
-  },
-
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     {
       src: '~/plugins/infiniteloading',
       ssr: false
     },
-    '~/plugins/markdownit', // 追加
+    '~/plugins/markdownit',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -55,8 +51,6 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // https://go.nuxtjs.dev/bootstrap
-    // 'bootstrap-vue/nuxt',
     '@nuxtjs/markdownit'
   ],
 
