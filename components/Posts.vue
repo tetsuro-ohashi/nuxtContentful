@@ -1,77 +1,58 @@
 <template>
-  <v-card flat>
-    <v-layout row wrap>
-      <v-flex v-for="(title, index) in titles" :key="index">
-        <v-card flat hover class="white pb-2 mb-1 pl-2">
-          <v-layout>
-            <v-flex xs10>
-              <div class="py-2">{{ title.body }}</div>
-            </v-flex>
-          </v-layout>
-        </v-card>
-      </v-flex>
-    </v-layout>
+  <ul>
+    <li v-for="(post, index) in posts" :key="index">
+      <p>{{ post.fields.title }}</p>
+      <div v-html="$md.render(post.fields.contents)"></div>
+    </li>
     <infinite-loading spinner="spiral" @infinite="infiniteScroll"></infinite-loading>
-  </v-card>
+  </ul>
 </template>
 
 <script>
-import {createClient} from '~/plugins/contentful.js'
-import axios from "axios";
-
+import client from '~/plugins/contentful.js'
+var page = 1
+var posts_per_page = 2
 export default {
   name: "Posts",
   data() {
     return {
-      titles: [],
-      page: 1
+      page: 1,
+      posts: []
     };
   },
-  computed: {
-    url() {
-      return "https://jsonplaceholder.typicode.com/posts?_page=" + this.page;
-    }
-  },
-  created() {
-    this.fetchData();
-  },
+  // created() {
+  //   this.fetchData();
+  // },
   methods: {
-    async fetchData() {
-      const response = await axios.get(this.url);
-      this.titles = response.data;
-    },
-    asyncData ({env}) {
-      return Promise.all([
-        // fetch the owner of the blog
-        client.getEntries({
-          'sys.id': env.CTF_PERSON_ID
-        }),
-        // fetch all blog posts sorted by creation date
-        client.getEntries({
-          'content_type': env.CTF_BLOG_POST_TYPE_ID,
-          order: '-sys.createdAt'
-        })
-      ]).then(([entries, posts]) => {
-        // return data that should be available
-        // in the template
-        return {
-          person: entries.items[0],
-          posts: posts.items
-        }
-      }).catch(console.error)
-    },
+    // async fetchData() {
+    //   // const response = await axios.get(this.url);
+    //   // this.titles = response.data;
+    //   return client.getEntries({
+    //     content_type: 'post',
+    //     skip: (page - 1) * posts_per_page,
+    //     limit: posts_per_page
+    //   })
+    //   .then(entries => {
+    //     this.posts = entries.items
+    //   })
+    // },
     infiniteScroll($state) {
-      setTimeout(() => {
-      this.page++
-      axios.get(this.url).then((response) => {
-        if (response.data.length > 1) {
-          response.data.forEach((item) => this.titles.push(item))
+      return client.getEntries({
+        content_type: 'post',
+        skip: page * posts_per_page,
+        limit: posts_per_page
+      })
+      .then(entries => {
+        if (entries.items.length) {
+          for(let i in entries.items) {
+            this.posts.push(entries.items[i])
+          }
           $state.loaded()
         } else {
           $state.complete()
         }
-      }).catch((err) => {console.log(err)})
-      }, 500)
+        page++
+      })
     }
   }
 }
