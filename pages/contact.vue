@@ -1,6 +1,6 @@
 <template>
-  <h1>Contact</h1>
   <section>
+    <h1>Contact</h1>
     <form role="form" method="POST" @submit.prevent="sendEmail">
       <!--NAME -->
       <label>Your Name:</label>
