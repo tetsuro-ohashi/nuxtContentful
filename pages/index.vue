@@ -1,4 +1,5 @@
 <template>
+  <h1>Nuxt Contentful</h1>
   <ul>
     <li v-for="(post, index) in posts" :key="index">
       <p>{{ post.fields.title }}</p>
