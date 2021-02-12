@@ -28,6 +28,11 @@ export default {
     base: './'
   },
 
+  generate: {
+    // dir: 'gh_pages', // dist/ の代わりに gh_pages/ を設定する
+    subFolders: false // HTML ファイルがルートパスに従って生成されます
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
 
   styleResources: {

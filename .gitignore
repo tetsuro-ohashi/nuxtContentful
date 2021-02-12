@@ -71,9 +71,6 @@ typings/
 # Nuxt generate
 dist
 
-# CNAME
-!dist/CNAME
-
 # vuepress build output
 .vuepress/dist
 
