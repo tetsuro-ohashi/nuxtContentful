@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Nuxt Contentful Page</h1>
+    <nuxt-link to="/contact/">Contact</nuxt-link>
     <Posts />
   </div>
 </template>
