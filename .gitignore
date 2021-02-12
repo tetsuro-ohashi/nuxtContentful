@@ -89,5 +89,5 @@ sw.*
 # Vim swap files
 *.swp
 
-# contentful API
-.contentful.json
+# # contentful API
+# .contentful.json
