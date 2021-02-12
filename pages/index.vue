@@ -1,12 +1,14 @@
 <template>
-  <h1>Nuxt Contentful</h1>
-  <ul>
-    <li v-for="(post, index) in posts" :key="index">
-      <p>{{ post.fields.title }}</p>
-      <div v-html="$md.render(post.fields.contents)"></div>
-    </li>
-    <infinite-loading spinner="spiral" @infinite="infiniteScroll"></infinite-loading>
-  </ul>
+  <div>
+    <h1>Nuxt Contentful</h1>
+    <ul>
+      <li v-for="(post, index) in posts" :key="index">
+        <p>{{ post.fields.title }}</p>
+        <div v-html="$md.render(post.fields.contents)"></div>
+      </li>
+      <infinite-loading spinner="spiral" @infinite="infiniteScroll"></infinite-loading>
+    </ul>
+  </div>
 </template>
 
 <script>
