@@ -24,9 +24,9 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/nuxtContentful/favicon.ico' }
     ]
   },
-  router: {
-    base: '/nuxtContentful/'
-  },
+  // router: {
+  //   base: '/nuxtContentful/'
+  // },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
 
