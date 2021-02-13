@@ -14,7 +14,7 @@ export default {
     return {
       filter: {
         tag: '',
-        posts_per_page: 10
+        posts_per_page: 2
       }
     }
   }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Tag slug {{ post.fields.title }}</h1>
+    <h1>Tag {{ post.fields.title }}</h1>
     <Posts :filter="{ tag: post.sys.id }" />
   </div>
 </template>

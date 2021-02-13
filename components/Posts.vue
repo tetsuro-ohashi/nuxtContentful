@@ -6,8 +6,8 @@
           {{ post.fields.title }}
         </nuxt-link>
         <!-- eslint-disable-next-line vue/no-v-html -->
-        <div class="posts__contents" v-html="toHtmlString(post.fields.contents).replace(/\n/g, `</br>`)" />
-        <ul class="posts-tags">
+        <!-- <div class="posts__contents" v-html="toHtmlString(post.fields.contents).replace(/\n/g, `</br>`)" /> -->
+        <ul v-if="post.fields.tags" class="posts-tags">
           <li v-for="(tag, tagindex) in post.fields.tags" :key="tagindex">
             <nuxt-link :to="{ name: 'tags-slug', params: { slug: tag.sys.id , tag: tag }}">
               {{ tag.fields.title }}
@@ -77,11 +77,15 @@ export default {
 <style lang="scss" scoped>
 .posts {
   &__item {
-    margin: 0 0 80px 0;
+    margin: 0 0 60px 0;
   }
 
   &__title {
     font-size: 3rem;
+
+    &:hover {
+      color: #4169e1;
+    }
   }
 
   &__contents {
@@ -96,7 +100,7 @@ export default {
       margin: 0 20px 0 0;
 
       a {
-        color: #00f;
+        color: #4169e1;
 
         &::before {
           content: "#";
