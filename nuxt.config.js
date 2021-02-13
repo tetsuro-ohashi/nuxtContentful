@@ -42,11 +42,15 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
 
-  styleResources: {
-    scss: [
-      '@/assets/scss/app.scss' // 読みませたい変数を記述したscssファイル
-    ]
-  },
+  css: [
+    '@/assets/scss/app.scss',
+  ],
+
+  // styleResources: {
+  //   scss: [
+  //     '@/assets/scss/app.scss' // 読みませたい変数を記述したscssファイル
+  //   ]
+  // },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
