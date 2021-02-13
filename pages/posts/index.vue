@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Posts</h1>
-    <Posts :filter="filter"/>
+    <Posts :filter="filter" />
   </div>
 </template>
 
@@ -9,16 +9,10 @@
 import Posts from '@/components/Posts.vue'
 export default {
   name: 'Main',
-  components: {
-    Posts,
-  },
-  data() {
-    return {
-      filter: {
-        tag: ''
-      }
-    };
-  },
+  components: { Posts },
+  data () {
+    return { filter: { tag: '' } }
+  }
 }
 </script>
 

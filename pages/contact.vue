@@ -3,57 +3,88 @@
     <h1>Contact</h1>
     <form role="form" method="POST" @submit.prevent="sendEmail">
       <!--NAME -->
-      <label>Your Name:</label>
-      <input type="text" name="name"placeholder="Name" v-model="nameMsg"/>
+      <dl>
+        <dt>
+          <label>Your Name:</label>
+        </dt>
+        <dd>
+          <input v-model="nameMsg" type="text" name="name" placeholder="Name">
+        </dd>
+      </dl>
       <!--EMAIL -->
-      <label>Your Email:</label>
-      <input type="email" name="_replyto" placeholder="abc@abc.com" v-model="emailMsg"/>
+      <dl>
+        <dt>
+          <label>Your Email:</label>
+        </dt>
+        <dd>
+          <input v-model="emailMsg" type="email" name="_replyto" placeholder="abc@abc.com">
+        </dd>
+      </dl>
       <!--MESSAGE-->
-      <label>Message:</label>
-      <textarea name="message" rows="5" placeholder="Message" v-model="messageMsg"></textarea>
+      <dl>
+        <dt>
+          <label>Message:</label>
+        </dt>
+        <dd>
+          <textarea v-model="messageMsg" name="message" rows="5" placeholder="Message" />
+        </dd>
+      </dl>
       <!--SUBMIT BUTTON-->
-      <input type="submit" :disabled="!nameMsg || !emailMsg || !messageMsg"/>
+      <dl>
+        <dd>
+          <input type="submit" :disabled="!nameMsg || !emailMsg || !messageMsg">
+        </dd>
+      </dl>
       <!--LOADING MESSAGE-->
-      <div v-if="loadingTxt">
-        <p class="mb-8 text-primary">Delivering your email...</p>
-      </div>
+      <dl>
+        <dd>
+          <div v-if="loadingTxt">
+            <p class="mb-8 text-primary">
+              Delivering your email...
+            </p>
+          </div>
+        </dd>
+      </dl>
     </form>
   </section>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
 export default {
-  data() {
-  return {
+  data () {
+    return {
       nameMsg: '',
       emailMsg: '',
       messageMsg: '',
-      loadingTxt: false,
-      };
+      loadingTxt: false
+    }
   },
   methods: {
-    sendEmail() {
-      this.loadingTxt= true;
-      axios.post('https://formspree.io/f/xnqoyqja',{
+    sendEmail () {
+      this.loadingTxt = true
+      axios.post('https://formspree.io/f/xnqoyqja', {
         name: this.nameMsg,
         from: this.emailMsg,
         _subject: `${this.nameMsg} | Friendly Message from Github Page`,
-        message: this.messageMsg,
-      },).then((response) => {
-          this.nameMsg = '';
-          this.emailMsg = '';
-          this.messageMsg = '';
-          this.loadingTxt = false;
-          //i redirect my app to '/success' route once payload completed.
-          this.$router.push({ path: '/success' });
-        }).catch((error) => {
+        message: this.messageMsg
+      }).then((response) => {
+        this.nameMsg = ''
+        this.emailMsg = ''
+        this.messageMsg = ''
+        this.loadingTxt = false
+        this.$router.push({ path: '/success' })
+      }).catch((error) => {
         if (error.response) {
           // eslint-disable-next-line no-alert
-          alert(error.response.data); // => the response payload
+          alert(error.response.data) // => the response payload
         }
-      });
-    },
-  },
-};
+      })
+    }
+  }
+}
 </script>
+
+<style lang="scss" scoped>
+</style>
+

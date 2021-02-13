@@ -1,57 +1,66 @@
 <template>
   <div>
-    <ul>
-      <li v-for="(post, index) in posts" :key="index">
-        <nuxt-link :to="{ name: 'posts-slug', params: { slug: post.sys.id  }}">{{ post.fields.title }}</nuxt-link>
-        <div v-html="toHtmlString(post.fields.contents).replace(/\n/g, `</br>`)" />
-        <ul>
-          <li v-for="(tag, index) in post.fields.tags" :key="index">
-            <nuxt-link :to="{ name: 'tags-slug', params: { slug: tag.sys.id , tag: tag }}">{{ tag.fields.title }}</nuxt-link>
+    <ul class="posts">
+      <li v-for="(post, index) in posts" :key="index" class="posts__item">
+        <nuxt-link :to="{ name: 'posts-slug', params: { slug: post.sys.id } }" class="posts__title">
+          {{ post.fields.title }}
+        </nuxt-link>
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <div class="posts__contents" v-html="toHtmlString(post.fields.contents).replace(/\n/g, `</br>`)" />
+        <ul class="posts-tags">
+          <li v-for="(tag, tagindex) in post.fields.tags" :key="tagindex">
+            <nuxt-link :to="{ name: 'tags-slug', params: { slug: tag.sys.id , tag: tag }}">
+              {{ tag.fields.title }}
+            </nuxt-link>
           </li>
         </ul>
       </li>
-      <infinite-loading spinner="spiral" @infinite="infiniteScroll"></infinite-loading>
+      <infinite-loading spinner="spiral" @infinite="infiniteScroll" />
     </ul>
-    </div>
+  </div>
 </template>
 
 <script>
-import client from '~/plugins/contentful.js'
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
+import client from '~/plugins/contentful.js'
 export default {
-  props: ['filter'],
-  name: "Posts",
-  data() {
+  name: 'Posts',
+  props: {
+    filter: {
+      type: Object,
+      default: () => ({ tag: '' })
+    }
+  },
+  data () {
     return {
       posts: [],
       page: 0,
       posts_per_page: 2,
       order: '-fields.date'
-    };
+    }
   },
-  created() {
+  created () {
     this.page = 0
-    if(this.filter.page){
+    if (this.filter.page) {
       this.page = this.filter.page
     }
-    if(this.filter.posts_per_page){
+    if (this.filter.posts_per_page) {
       this.posts_per_page = this.filter.posts_per_page
     }
   },
   methods: {
-    toHtmlString(obj) {
+    toHtmlString (obj) {
       return documentToHtmlString(obj)
     },
-    infiniteScroll($state) {
+    infiniteScroll ($state) {
       return client.getEntries({
         content_type: 'post',
         skip: this.page * this.posts_per_page,
         limit: this.posts_per_page,
-        'fields.tags.sys.id': this.filter.tag,
-      })
-      .then(entries => {
+        'fields.tags.sys.id': this.filter.tag
+      }).then((entries) => {
         if (entries.items.length) {
-          for(let i in entries.items) {
+          for (const i in entries.items) {
             this.posts.push(entries.items[i])
           }
           $state.loaded()
@@ -65,8 +74,35 @@ export default {
 }
 </script>
 
-<style scoped>
-.theme--light.v-card {
-  background-color: #f5f5f5;
+<style lang="scss" scoped>
+.posts {
+  &__item {
+    margin: 0 0 80px 0;
+  }
+
+  &__title {
+    font-size: 3rem;
+  }
+
+  &__contents {
+    margin: 20px 0 0;
+  }
+
+  &-tags {
+    display: flex;
+    margin: 20px 0 0;
+
+    li {
+      margin: 0 20px 0 0;
+
+      a {
+        color: #00f;
+
+        &::before {
+          content: "#";
+        }
+      }
+    }
+  }
 }
 </style>

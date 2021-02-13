@@ -40,17 +40,20 @@ export default {
     subFolders: false // HTML ファイルがルートパスに従って生成されます
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
-
-  css: [
-    '@/assets/scss/app.scss',
+  // Modules: https://go.nuxtjs.dev/config-modules
+  modules: [
+    '@nuxtjs/markdownit',
+    '@nuxtjs/style-resources'
   ],
 
-  // styleResources: {
-  //   scss: [
-  //     '@/assets/scss/app.scss' // 読みませたい変数を記述したscssファイル
-  //   ]
-  // },
+  css: [
+    '@/assets/scss/app.scss'
+  ],
+  styleResources: {
+    scss: [
+      '@/assets/scss/app.scss'
+    ]
+  },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -66,11 +69,8 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-  ],
-
-  // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    '@nuxtjs/markdownit'
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/stylelint-module'
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

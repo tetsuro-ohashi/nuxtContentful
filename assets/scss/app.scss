@@ -1,4 +1,12 @@
-p{
-  font-weight: bold;
-  font-size: 20px;
+@import "_library/_reset";
+@import "_library/_animation";
+@import "_library/_colors";
+@import "_library/_fonts";
+@import "_library/_mixin";
+@import "_library/_localmixin";
+@import "_library/_typo";
+
+h1 {
+  margin: 40px 0;
+  font-size: 2rem;
 }

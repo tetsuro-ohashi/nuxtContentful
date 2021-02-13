@@ -1,0 +1,142 @@
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+ul,
+ol,
+dl,
+li,
+dt,
+dd,
+p,
+div,
+span,
+img,
+a,
+table,
+tr,
+th,
+td {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  border: 0;
+  font-feature-settings: "palt";
+}
+
+article,
+header,
+footer,
+aside,
+figure,
+figcaption,
+nav,
+section {
+  display: block;
+}
+
+button {
+  padding: 0;
+  font: unset;
+  background: none;
+  background-color: unset;
+  border: 0;
+  border: none;
+  border-width: 0;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+html {
+  font-family: 'Noto Sans Japanese', sans-serif;
+  font-size: 62.5%;
+  font-weight: 400;
+}
+
+body {
+  font-size: 1.4rem;
+  line-height: 1;
+  letter-spacing: 0.1em;
+
+  &::first-line {
+    line-height: 1;
+  }
+
+  &[data-modalActive="true"] { //modal.js
+    position: fixed;
+    z-index: 10;
+  }
+}
+
+ol,
+ul {
+  list-style: none;
+  list-style-type: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+// img[src$=".svg"] {
+//   width: 100%;
+//   height: auto;
+// }
+
+// input[type="text"]{
+//   box-sizing: border-box;
+//   -moz-box-sizing: border-box;
+//   -webkit-box-sizing: border-box;
+//   -webkit-appearance: none;
+//   max-width: 100%;
+//   padding: 0;
+//   border: none;
+//   border-radius: 0;
+//   outline: none;
+//   background: none;
+// }
+// input[type="email"]{
+//   @extend input[type="text"];
+// }
+
+// input[type="tel"]{
+//   @extend input[type="text"];
+// }
+// input[type="checkbox"]{
+//   @extend input[type="text"];
+// }
+// textarea{
+//   @extend input[type="text"];
+// }
+// select{
+//   appearance: none;
+//   border-radius: 0;
+//   border: 0;
+//   margin: 0;
+//   padding: 0;
+//   background: none transparent;
+//   vertical-align: middle;
+//   font-size: inherit;
+//   color: inherit;
+//   box-sizing: content-box;
+
+//   &::-ms-expand {
+//     display: none;
+//   }
+// }

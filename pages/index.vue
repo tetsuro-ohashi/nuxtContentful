@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Nuxt Contentful Page</h1>
-    <Posts :filter="filter"/>
+    <Posts :filter="filter" />
   </div>
 </template>
 
@@ -9,19 +9,17 @@
 import Posts from '@/components/Posts.vue'
 export default {
   name: 'Main',
-  components: {
-    Posts,
-  },
-  data() {
+  components: { Posts },
+  data () {
     return {
       filter: {
         tag: '',
         posts_per_page: 10
       }
-    };
-  },
+    }
+  }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 </style>
