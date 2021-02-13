@@ -33,6 +33,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h1 {
+  margin: 40px 0 40px;
+}
+
 .posts {
   &__item {
     margin: 0 0 60px 0;
