@@ -25,7 +25,14 @@ export default {
     ]
   },
   router: {
-    base: '/'
+    base: '/',
+    extendRoutes(routes, resolve) {
+      routes.push({
+        name: 'notFound',
+        path: '*',
+        component: resolve(__dirname, 'pages/404.vue')
+      })
+    }
   },
 
   generate: {

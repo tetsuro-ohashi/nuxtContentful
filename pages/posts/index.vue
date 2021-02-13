@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Nuxt Contentful Page</h1>
+    <h1>Posts</h1>
     <Posts :filter="filter"/>
   </div>
 </template>
