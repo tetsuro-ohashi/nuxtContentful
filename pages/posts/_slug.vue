@@ -24,6 +24,11 @@ export default {
   data () {
     return { }
   },
+  head() {
+    return {
+      titleTemplate: `${this.post.fields.title} | %s`
+    }
+  },
   methods: {
     toHtmlString (obj) {
       return documentToHtmlString(obj)
