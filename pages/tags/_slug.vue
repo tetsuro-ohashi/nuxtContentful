@@ -11,15 +11,21 @@ import client from '~/plugins/contentful.js'
 export default {
   name: 'Main',
   components: { Posts },
-  async asyncData ({ params, payload }) {
-    const entry = await client.getEntry(params.slug)
-    return { post: entry }
+  async asyncData ({ params }) {
+    return await client.getEntries({
+      content_type: 'tag',
+      limit: 1,
+      'fields.slug': params.slug
+    }).then((entries) => { return { post: entries.items[0] } })
   },
   data () {
     return {
       title: '',
       filter: { tag: '' }
     }
+  },
+  head () {
+    return { titleTemplate: `${this.post.fields.title} | %s` }
   }
 }
 </script>

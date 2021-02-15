@@ -2,14 +2,14 @@
   <div>
     <ul class="posts">
       <li v-for="(post, index) in posts" :key="index" class="posts__item">
-        <nuxt-link :to="{ name: 'posts-slug', params: { slug: post.sys.id } }" class="posts__title">
+        <nuxt-link :to="{ name: 'posts-slug', params: { slug: post.fields.slug } }" class="posts__title">
           {{ post.fields.title }}
         </nuxt-link>
         <!-- eslint-disable-next-line vue/no-v-html -->
         <!-- <div class="posts__contents" v-html="toHtmlString(post.fields.contents).replace(/\n/g, `</br>`)" /> -->
         <ul v-if="post.fields.tags" class="posts-tags">
           <li v-for="(tag, tagindex) in post.fields.tags" :key="tagindex">
-            <nuxt-link :to="{ name: 'tags-slug', params: { slug: tag.sys.id , tag: tag }}">
+            <nuxt-link :to="{ name: 'tags-slug', params: { slug: tag.fields.slug, tag: tag }}">
               {{ tag.fields.title }}
             </nuxt-link>
           </li>
@@ -57,7 +57,8 @@ export default {
         content_type: 'post',
         skip: this.page * this.posts_per_page,
         limit: this.posts_per_page,
-        'fields.tags.sys.id': this.filter.tag
+        'fields.tags.sys.id': this.filter.tag,
+        order: this.order
       }).then((entries) => {
         if (entries.items.length) {
           for (const i in entries.items) {

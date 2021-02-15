@@ -17,17 +17,18 @@ import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
 import client from '~/plugins/contentful.js'
 
 export default {
-  async asyncData ({ params, payload }) {
-    const entry = await client.getEntry(params.slug)
-    return { post: entry }
+  async asyncData ({ params }) {
+    return await client.getEntries({
+      content_type: process.env.CTF_BLOG_POST_TYPE_ID,
+      limit: 1,
+      'fields.slug': params.slug
+    }).then((entries) => { return { post: entries.items[0] } })
   },
   data () {
     return { }
   },
-  head() {
-    return {
-      titleTemplate: `${this.post.fields.title} | %s`
-    }
+  head () {
+    return { titleTemplate: `${this.post.fields.title} | %s` }
   },
   methods: {
     toHtmlString (obj) {
