@@ -15,7 +15,7 @@
           </li>
         </ul>
       </li>
-      <infinite-loading spinner="spiral" @infinite="infiniteScroll" />
+      <infinite-loading v-if="page>0" spinner="spiral" @infinite="infiniteScroll" />
     </ul>
   </div>
 </template>
@@ -41,6 +41,7 @@ export default {
   },
   created () {
     this.page = 0
+    this.getPosts()
     if (this.filter.page) {
       this.page = this.filter.page
     }
@@ -52,7 +53,8 @@ export default {
     toHtmlString (obj) {
       return documentToHtmlString(obj)
     },
-    infiniteScroll ($state) {
+    infiniteScroll ($state) { this.getPosts($state) },
+    getPosts ($state) {
       return client.getEntries({
         content_type: 'post',
         skip: this.page * this.posts_per_page,
@@ -64,8 +66,10 @@ export default {
           for (const i in entries.items) {
             this.posts.push(entries.items[i])
           }
-          $state.loaded()
-        } else {
+          if ($state) {
+            $state.loaded()
+          }
+        } else if ($state) {
           $state.complete()
         }
         this.page++
