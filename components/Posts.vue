@@ -7,13 +7,7 @@
         </nuxt-link>
         <!-- eslint-disable-next-line vue/no-v-html -->
         <!-- <div class="posts__contents" v-html="toHtmlString(post.fields.contents).replace(/\n/g, `</br>`)" /> -->
-        <ul v-if="post.fields.tags" class="posts-tags">
-          <li v-for="(tag, tagindex) in post.fields.tags" :key="tagindex">
-            <nuxt-link :to="{ name: 'tags-slug', params: { slug: tag.fields.slug, tag: tag }}">
-              {{ tag.fields.title }}
-            </nuxt-link>
-          </li>
-        </ul>
+        <Tags :tags="post.fields.tags" />
       </li>
       <infinite-loading v-if="page>0" spinner="spiral" @infinite="infiniteScroll" />
     </ul>
@@ -22,9 +16,11 @@
 
 <script>
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
+import Tags from '@/components/Tags.vue'
 import client from '~/plugins/contentful.js'
 export default {
   name: 'Posts',
+  components: { Tags },
   props: {
     filter: {
       type: Object,
@@ -95,23 +91,6 @@ export default {
 
   &__contents {
     margin: 20px 0 0;
-  }
-
-  &-tags {
-    display: flex;
-    margin: 20px 0 0;
-
-    li {
-      margin: 0 20px 0 0;
-
-      a {
-        color: #4169e1;
-
-        &::before {
-          content: "#";
-        }
-      }
-    }
   }
 }
 </style>

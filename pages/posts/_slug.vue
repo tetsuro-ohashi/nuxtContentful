@@ -3,20 +3,16 @@
     <h1>{{ post.fields.title }}</h1>
     <!-- eslint-disable-next-line vue/no-v-html -->
     <div class="posts__contents" v-html="toHtmlString(post.fields.contents).replace(/\n/g, `</br>`)" />
-    <ul class="posts-tags">
-      <li v-for="(tag, tagindex) in post.fields.tags" :key="tagindex">
-        <nuxt-link :to="{ name: 'tags-slug', params: { slug: tag.sys.id , tag: tag }}">
-          {{ tag.fields.title }}
-        </nuxt-link>
-      </li>
-    </ul>
+    <Tags :tags="post.fields.tags" />
   </section>
 </template>
 <script>
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
+import Tags from '@/components/Tags.vue'
 import client from '~/plugins/contentful.js'
 
 export default {
+  components: { Tags },
   async asyncData ({ params }) {
     return await client.getEntries({
       content_type: process.env.CTF_BLOG_POST_TYPE_ID,

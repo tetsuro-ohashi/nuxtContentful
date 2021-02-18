@@ -1,8 +1,33 @@
 <template>
   <section>
     <h1>Contact</h1>
-    <form role="form" method="POST" @submit.prevent="sendEmail">
-      <!--NAME -->
+    <form name="contact" method="POST" netlify>
+      <p>
+        <label>Your Name: <input type="text" name="name"></label>
+      </p>
+      <p>
+        <label>Your Email: <input type="email" name="email"></label>
+      </p>
+      <!-- <p>
+        <label>Your Role: <select name="role[]" multiple>
+          <option value="leader">Leader</option>
+          <option value="follower">Follower</option>
+        </select></label>
+      </p> -->
+      <p>
+        <label>submit: <input type="text" name="subject"></label>
+      </p>
+      <p>
+        <label>Message: <textarea name="message" /></label>
+      </p>
+      <p>
+        <button type="submit">
+          Send
+        </button>
+      </p>
+    </form>
+
+    <!-- <form role="form" method="POST" @submit.prevent="sendEmail">
       <dl>
         <dt>
           <label>Your Name:</label>
@@ -11,7 +36,6 @@
           <input v-model="nameMsg" type="text" name="name" placeholder="Name">
         </dd>
       </dl>
-      <!--EMAIL -->
       <dl>
         <dt>
           <label>Your Email:</label>
@@ -20,7 +44,6 @@
           <input v-model="emailMsg" type="email" name="_replyto" placeholder="abc@abc.com">
         </dd>
       </dl>
-      <!--MESSAGE-->
       <dl>
         <dt>
           <label>Message:</label>
@@ -29,13 +52,11 @@
           <textarea v-model="messageMsg" name="message" rows="5" placeholder="Message" />
         </dd>
       </dl>
-      <!--SUBMIT BUTTON-->
       <dl>
         <dd>
           <input type="submit" :disabled="!nameMsg || !emailMsg || !messageMsg">
         </dd>
       </dl>
-      <!--LOADING MESSAGE-->
       <dl>
         <dd>
           <div v-if="loadingTxt">
@@ -45,7 +66,7 @@
           </div>
         </dd>
       </dl>
-    </form>
+    </form> -->
   </section>
 </template>
 
