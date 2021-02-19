@@ -17,7 +17,7 @@
         <p>
           <label>
             件名:
-            <input v-model="form.email" type="text" name="subject">
+            <input v-model="form.subject" type="text" name="subject">
           </label>
         </p>
         <p>
