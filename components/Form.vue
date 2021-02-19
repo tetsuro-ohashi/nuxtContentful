@@ -1,109 +1,82 @@
 <template>
-  <div>
-    <form name="contact" netlify-honeypot="bot-field" action="thank-you" data-netlify="true">
-      <input type="hidden" name="form-name" value="contact">
-      <p class="hidden" style="display: none;">
-        <label>Don’t fill this out: <input name="bot-field"></label>
-      </p>
-      <p>
-        <label>Name: <input type="text" name="name"></label>
-      </p>
-      <p>
-        <label>Email: <input type="email" name="email"></label>
-      </p>
-      <p>
-        <label>Subject: <input type="text" name="subject"></label>
-      </p>
-      <p>
-        <label>Message: <textarea name="content" /></label>
-      </p>
-      <p>
-        <button type="submit">
-          Send
-        </button>
-      </p>
-    </form>
-
-    <!-- <form role="form" method="POST" @submit.prevent="sendEmail">
-      <dl>
-        <dt>
-          <label>Your Name:</label>
-        </dt>
-        <dd>
-          <input v-model="nameMsg" type="text" name="name" placeholder="Name">
-        </dd>
-      </dl>
-      <dl>
-        <dt>
-          <label>Your Email:</label>
-        </dt>
-        <dd>
-          <input v-model="emailMsg" type="email" name="_replyto" placeholder="abc@abc.com">
-        </dd>
-      </dl>
-      <dl>
-        <dt>
-          <label>Message:</label>
-        </dt>
-        <dd>
-          <textarea v-model="messageMsg" name="message" rows="5" placeholder="Message" />
-        </dd>
-      </dl>
-      <dl>
-        <dd>
-          <input type="submit" :disabled="!nameMsg || !emailMsg || !messageMsg">
-        </dd>
-      </dl>
-      <dl>
-        <dd>
-          <div v-if="loadingTxt">
-            <p class="mb-8 text-primary">
-              Delivering your email...
-            </p>
-          </div>
-        </dd>
-      </dl>
-    </form> -->
-  </div>
+  <section class="contact-container">
+    <template v-if="!finished">
+      <form name="contact" method="POST" data-netlify="true" @submit.prevent>
+        <p>
+          <label>
+            お名前:
+            <input v-model="form.name" type="text" name="name">
+          </label>
+        </p>
+        <p>
+          <label>
+            メールアドレス:
+            <input v-model="form.email" type="email" name="email">
+          </label>
+        </p>
+        <p>
+          <label>
+            件名:
+            <input v-model="form.email" type="text" name="subject">
+          </label>
+        </p>
+        <p>
+          <label>
+            お問い合わせ内容:
+            <textarea id="form-content" v-model="form.content" name="content" />
+          </label>
+        </p>
+        <p>
+          <button @click="handleSubmit" v-text="'送信'" />
+        </p>
+      </form>
+    </template>
+    <template v-else>
+      <p v-text="'お問い合わせ頂きありがとうございました。'" />
+      <p><nuxt-link to="/" v-text="'TOPへ'" /></p>
+    </template>
+  </section>
 </template>
 
 <script>
-// import axios from 'axios'
-// export default {
-//   data () {
-//     return {
-//       nameMsg: '',
-//       emailMsg: '',
-//       messageMsg: '',
-//       loadingTxt: false
-//     }
-//   },
-//   methods: {
-//     sendEmail () {
-//       this.loadingTxt = true
-//       axios
-//         .post('https://formspree.io/f/xnqoyqja', {
-//           name: this.nameMsg,
-//           from: this.emailMsg,
-//           _subject: `${this.nameMsg} | Friendly Message from Github Page`,
-//           message: this.messageMsg
-//         })
-//         .then((response) => {
-//           this.nameMsg = ''
-//           this.emailMsg = ''
-//           this.messageMsg = ''
-//           this.loadingTxt = false
-//           this.$router.push({ path: '/success' })
-//         })
-//         .catch((error) => {
-//           if (error.response) {
-//             // eslint-disable-next-line no-alert
-//             alert(error.response.data) // => the response payload
-//           }
-//         })
-//     }
-//   }
-// }
+import axios from 'axios'
+export default {
+  data () {
+    return {
+      form: {
+        name: '',
+        email: '',
+        subject: '',
+        content: ''
+      },
+      finished: false
+    }
+  },
+  methods: {
+    encode (data) {
+      return Object.keys(data)
+        .map(
+          key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
+        )
+        .join('&')
+    },
+    handleSubmit () {
+      const axiosConfig = { header: { 'Content-Type': 'application/x-www-form-urlencoded' } }
+      axios
+        .post(
+          '/',
+          this.encode({
+            'form-name': 'contact',
+            ...this.form
+          }),
+          axiosConfig
+        )
+        .then(() => {
+          this.finished = true
+        })
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped></style>
